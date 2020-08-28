@@ -1,5 +1,7 @@
 package com.udacity.jdnd.course3.critter.user.service;
 
+import com.udacity.jdnd.course3.critter.pet.entity.Pet;
+import com.udacity.jdnd.course3.critter.pet.repository.PetRepository;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import com.udacity.jdnd.course3.critter.user.entity.Customer;
 import com.udacity.jdnd.course3.critter.user.entity.Employee;
@@ -8,10 +10,7 @@ import com.udacity.jdnd.course3.critter.user.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -25,8 +24,19 @@ public class UserService {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    PetRepository petRepository;
+
     public Customer saveCustomer(Customer customer) {
-        return customerRepository.save(customer);
+        Customer saveCustomer = customerRepository.save(customer);
+        saveCustomer.getPets().forEach(pet -> savePet(pet, saveCustomer));
+
+        return saveCustomer;
+    }
+
+    private void savePet(Pet pet, Customer customer) {
+        pet.setOwner(customer);
+        petRepository.save(pet);
     }
 
     public List<Customer> getAllCustomer() {

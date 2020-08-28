@@ -26,12 +26,22 @@ public class UserMapper {
         customer.setName(customerDTO.getName());
         customer.setNotes(customerDTO.getNotes());
         customer.setPhoneNumber(customerDTO.getPhoneNumber());
-        customer.setPets(findPetsByIds(customerDTO.getPetIds()));
+        customer.setPets(findPetsByIds(customerDTO.getPetIds(), customer.getId()));
         return customer;
     }
 
-    private List<Pet> findPetsByIds(List<Long> ids) {
-        return ids.stream().map(id -> findPet(id)).collect(Collectors.toList());
+    private List<Pet> findPetsByIds(List<Long> ids, Long ownerId) {
+        List<Pet> pets = ids.stream().map(id -> findPet(id)).collect(Collectors.toList());
+        pets.stream().filter(pet -> checkOwner(pet, ownerId)).collect(Collectors.toList());
+        return pets;
+    }
+
+    private boolean checkOwner(Pet pet, Long ownerId) {
+        if (pet.getOwner() == null || pet.getOwner().getId().equals(ownerId)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Pet findPet(Long id) {

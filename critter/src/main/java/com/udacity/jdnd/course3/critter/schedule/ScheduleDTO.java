@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScheduleDTO {
-    private long id;
+    private Long id;
     private List<Long> employeeIds;
     private List<Long> petIds;
     private LocalDate date;

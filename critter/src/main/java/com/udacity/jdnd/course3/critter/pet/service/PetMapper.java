@@ -29,7 +29,7 @@ public class PetMapper {
     }
 
     private Customer findCustomerById(Long id) {
-        if (id != 0) {
+        if (id != null) {
             Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
             if (optionalCustomer.isPresent()) {
@@ -49,7 +49,7 @@ public class PetMapper {
                 .birthDate(pet.getBirthDate())
                 .notes(pet.getNotes())
                 .type(PetType.valueOf(pet.getType()))
-                .ownerId(pet.getOwner() != null ? pet.getOwner().getId() : 0)
+                .ownerId(pet.getOwner() != null ? pet.getOwner().getId() : null)
                 .build();
     }
 
