@@ -21,7 +21,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "pet")
 public class Pet {
 
     @GeneratedValue
