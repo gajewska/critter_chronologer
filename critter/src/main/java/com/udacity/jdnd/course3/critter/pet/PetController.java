@@ -48,11 +48,10 @@ public class PetController {
                 .collect(Collectors.toList());
     }
 
-    //TODO
-//    @GetMapping("/owner/{ownerId}")
-//    public List<PetDTO> getPetsByOwner(@PathVariable long ownerId) {
-//        return petService.getByOwnerId(ownerId).stream()
-//                .map(pet -> petMapper.toDTO(pet))
-//                .collect(Collectors.toList());
-//    }
+    @GetMapping("/owner/{ownerId}")
+    public List<PetDTO> getPetsByOwner(@PathVariable long ownerId) {
+        return petService.getByOwnerId(ownerId).stream()
+                .map(pet -> petMapper.toDTO(pet))
+                .collect(Collectors.toList());
+    }
 }

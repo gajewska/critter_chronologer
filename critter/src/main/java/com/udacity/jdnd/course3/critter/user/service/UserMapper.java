@@ -32,14 +32,13 @@ public class UserMapper {
 
     private List<Pet> setPetToCustomer(CustomerDTO customerDTO) {
         if (customerDTO.getPetIds() != null) {
-            return findPetsByIds(customerDTO.getPetIds(), customerDTO.getId());
+            return findPetsByIds(customerDTO.getPetIds());
         }
         return null;
     }
 
-    private List<Pet> findPetsByIds(List<Long> ids, Long ownerId) {
+    private List<Pet> findPetsByIds(List<Long> ids) {
         List<Pet> pets = ids.stream().map(id -> findPet(id)).collect(Collectors.toList());
-        pets.stream().filter(pet -> checkOwner(pet, ownerId)).collect(Collectors.toList());
         return pets;
     }
 
