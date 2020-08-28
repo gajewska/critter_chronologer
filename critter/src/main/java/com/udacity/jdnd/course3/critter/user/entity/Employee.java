@@ -21,5 +21,4 @@ public class Employee extends Person {
 
     @ElementCollection
     private Collection<DayOfWeek> daysAvailable = new ArrayList<DayOfWeek>();
-
 }
