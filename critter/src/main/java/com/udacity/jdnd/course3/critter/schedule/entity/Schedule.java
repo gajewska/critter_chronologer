@@ -8,13 +8,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -27,15 +34,14 @@ public class Schedule {
     @GeneratedValue
     private Long id;
 
-    //TODO
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.ALL)
-//    private List<Employee> employees;
-
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pet", cascade = CascadeType.ALL)
+//   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//   private List<Employee> employees;
+//
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private List<Pet> pets;
 
     private LocalDate date;
 
     @ElementCollection
-    private Collection<EmployeeSkill> activities = new ArrayList<EmployeeSkill>();
+    private Set<EmployeeSkill> activities = new HashSet<>();
 }

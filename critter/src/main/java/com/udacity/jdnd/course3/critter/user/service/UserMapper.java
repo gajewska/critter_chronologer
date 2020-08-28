@@ -10,8 +10,6 @@ import com.udacity.jdnd.course3.critter.user.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -65,10 +63,10 @@ public class UserMapper {
         employee.setId(employeeDTO.getId());
         employee.setName(employeeDTO.getName());
         if (employeeDTO.getSkills() != null) {
-            employee.setSkills(new ArrayList<>(employeeDTO.getSkills()));
+            employee.setSkills(employeeDTO.getSkills());
         }
         if (employeeDTO.getDaysAvailable() != null) {
-            employee.setDaysAvailable(new ArrayList<>(employeeDTO.getDaysAvailable()));
+            employee.setDaysAvailable(employeeDTO.getDaysAvailable());
         }
         return employee;
     }
@@ -77,8 +75,8 @@ public class UserMapper {
         return EmployeeDTO.builder()
                 .id(employee.getId())
                 .name(employee.getName())
-                .daysAvailable(new HashSet<>(employee.getDaysAvailable()))
-                .skills(new HashSet<>(employee.getSkills()))
+                .daysAvailable(employee.getDaysAvailable())
+                .skills(employee.getSkills())
                 .build();
     }
 
