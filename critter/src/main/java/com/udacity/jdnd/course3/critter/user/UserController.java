@@ -1,7 +1,5 @@
 package com.udacity.jdnd.course3.critter.user;
 
-import com.udacity.jdnd.course3.critter.pet.entity.Pet;
-import com.udacity.jdnd.course3.critter.pet.service.PetService;
 import com.udacity.jdnd.course3.critter.user.entity.Customer;
 import com.udacity.jdnd.course3.critter.user.entity.Employee;
 import com.udacity.jdnd.course3.critter.user.service.UserMapper;
@@ -38,7 +36,7 @@ public class UserController {
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
-        Customer customer = userMapper.customerFromDto(customerDTO);
+        Customer customer = userMapper.customerFromDTO(customerDTO);
         Customer saveCustomer = userService.saveCustomer(customer);
 
         return userMapper.customerToDTO(saveCustomer);
@@ -54,7 +52,9 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+        Customer customerByPetId = userService.getCustomerByPetId(petId);
+
+        return userMapper.customerToDTO(customerByPetId);
     }
 
     @PostMapping("/employee")

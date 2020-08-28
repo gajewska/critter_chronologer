@@ -20,7 +20,7 @@ public class UserMapper {
     @Autowired
     PetRepository petRepository;
 
-    public Customer customerFromDto(CustomerDTO customerDTO) {
+    public Customer customerFromDTO(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setId(customerDTO.getId());
         customer.setName(customerDTO.getName());

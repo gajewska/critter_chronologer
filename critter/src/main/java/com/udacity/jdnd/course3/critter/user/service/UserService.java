@@ -2,6 +2,7 @@ package com.udacity.jdnd.course3.critter.user.service;
 
 import com.udacity.jdnd.course3.critter.pet.entity.Pet;
 import com.udacity.jdnd.course3.critter.pet.repository.PetRepository;
+import com.udacity.jdnd.course3.critter.pet.service.PetNotFoundException;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import com.udacity.jdnd.course3.critter.user.entity.Customer;
 import com.udacity.jdnd.course3.critter.user.entity.Employee;
@@ -65,5 +66,21 @@ public class UserService {
         );
 
         return employees;
+    }
+
+    public Customer getCustomerByPetId(Long petId) {
+        Pet pet = findPet(petId);
+
+        return customerRepository.findCustomerByPets(pet);
+    }
+
+    private Pet findPet(Long id) {
+        Optional<Pet> optionalPet = petRepository.findById(id);
+
+        if (optionalPet.isPresent()) {
+            return optionalPet.get();
+        }
+
+        throw new PetNotFoundException(String.format("Pet with id %d wasn't found", id));
     }
 }
