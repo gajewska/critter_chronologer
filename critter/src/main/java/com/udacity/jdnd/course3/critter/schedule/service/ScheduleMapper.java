@@ -6,6 +6,7 @@ import com.udacity.jdnd.course3.critter.pet.service.PetNotFoundException;
 import com.udacity.jdnd.course3.critter.schedule.ScheduleDTO;
 import com.udacity.jdnd.course3.critter.schedule.entity.Schedule;
 import com.udacity.jdnd.course3.critter.user.entity.Employee;
+import com.udacity.jdnd.course3.critter.user.repository.CustomerRepository;
 import com.udacity.jdnd.course3.critter.user.repository.EmployeeRepository;
 import com.udacity.jdnd.course3.critter.user.service.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ScheduleMapper {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    CustomerRepository customerRepository;
 
     @Autowired
     PetRepository petRepository;

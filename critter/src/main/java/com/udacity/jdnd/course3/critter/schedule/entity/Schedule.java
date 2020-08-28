@@ -2,6 +2,7 @@ package com.udacity.jdnd.course3.critter.schedule.entity;
 
 import com.udacity.jdnd.course3.critter.pet.entity.Pet;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
+import com.udacity.jdnd.course3.critter.user.entity.Customer;
 import com.udacity.jdnd.course3.critter.user.entity.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
