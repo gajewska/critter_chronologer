@@ -29,8 +29,9 @@ public class UserService {
 
     public Customer saveCustomer(Customer customer) {
         Customer saveCustomer = customerRepository.save(customer);
-        saveCustomer.getPets().forEach(pet -> savePet(pet, saveCustomer));
-
+        if (customer.getPets() != null) {
+            saveCustomer.getPets().forEach(pet -> savePet(pet, saveCustomer));
+        }
         return saveCustomer;
     }
 

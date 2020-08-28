@@ -36,9 +36,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    PetService petService;
-
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
         Customer customer = userMapper.customerFromDto(customerDTO);

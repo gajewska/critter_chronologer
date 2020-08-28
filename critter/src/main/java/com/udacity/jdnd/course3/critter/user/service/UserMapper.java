@@ -26,8 +26,15 @@ public class UserMapper {
         customer.setName(customerDTO.getName());
         customer.setNotes(customerDTO.getNotes());
         customer.setPhoneNumber(customerDTO.getPhoneNumber());
-        customer.setPets(findPetsByIds(customerDTO.getPetIds(), customer.getId()));
+        customer.setPets(setPetToCustomer(customerDTO));
         return customer;
+    }
+
+    private List<Pet> setPetToCustomer(CustomerDTO customerDTO) {
+        if (customerDTO.getPetIds() != null) {
+            return findPetsByIds(customerDTO.getPetIds(), customerDTO.getId());
+        }
+        return null;
     }
 
     private List<Pet> findPetsByIds(List<Long> ids, Long ownerId) {
@@ -65,7 +72,8 @@ public class UserMapper {
     }
 
     private List<Long> getPetsId(List<Pet> pets) {
-        return pets.stream().map(pet -> pet.getId()).collect(Collectors.toList());
+        return pets != null ?
+                pets.stream().map(pet -> pet.getId()).collect(Collectors.toList()) : null;
     }
 
     public Employee employeeFromDTO(EmployeeDTO employeeDTO) {
