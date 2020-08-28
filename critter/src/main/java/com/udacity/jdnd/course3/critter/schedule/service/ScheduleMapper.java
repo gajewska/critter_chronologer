@@ -70,7 +70,6 @@ public class ScheduleMapper {
         }
     }
 
-
     public ScheduleDTO toDTO(Schedule schedule) {
         return ScheduleDTO.builder()
                 .id(schedule.getId())
