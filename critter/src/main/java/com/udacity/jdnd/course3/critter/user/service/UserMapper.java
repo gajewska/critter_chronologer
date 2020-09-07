@@ -48,7 +48,7 @@ public class UserMapper {
         if (optionalPet.isPresent()) {
             return optionalPet.get();
         } else {
-            throw new PetNotFoundException(String.format("Pet with id %d wasn't found", id));
+            throw new PetNotFoundException(id);
         }
     }
 

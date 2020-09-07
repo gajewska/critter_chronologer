@@ -35,7 +35,7 @@ public class PetMapper {
             if (optionalCustomer.isPresent()) {
                 return optionalCustomer.get();
             } else {
-                throw new CustomerNotFoundException(String.format("Pet with id %d wasn't found", id));
+                throw new CustomerNotFoundException(id);
             }
         } else {
             return null;

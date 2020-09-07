@@ -60,7 +60,7 @@ public class ScheduleMapper {
         if (optionalEmployee.isPresent()) {
             return optionalEmployee.get();
         } else {
-            throw new EmployeeNotFoundException(String.format("Employee with id %d wasn't found", id));
+            throw new EmployeeNotFoundException(id);
         }
     }
 
@@ -70,7 +70,7 @@ public class ScheduleMapper {
         if (optionalPet.isPresent()) {
             return optionalPet.get();
         } else {
-            throw new PetNotFoundException(String.format("Pet with id %d wasn't found", id));
+            throw new PetNotFoundException(id);
         }
     }
 

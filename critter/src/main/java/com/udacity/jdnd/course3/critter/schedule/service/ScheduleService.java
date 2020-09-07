@@ -71,7 +71,7 @@ public class ScheduleService {
             return optionalPet.get();
         }
 
-        throw new PetNotFoundException(String.format("Pet with id %d wasn't found", id));
+        throw new PetNotFoundException(id);
     }
 
     private Employee findEmployee(Long id) {
@@ -81,7 +81,7 @@ public class ScheduleService {
             return optionalEmployee.get();
         }
 
-        throw new EmployeeNotFoundException(String.format("Employee with id %d wasn't found", id));
+        throw new EmployeeNotFoundException(id);
     }
 
     private Customer findCustomer(Long id) {
@@ -91,7 +91,7 @@ public class ScheduleService {
             return optionalCustomer.get();
         }
 
-        throw new CustomerNotFoundException(String.format("Customer with id %d wasn't found", id));
+        throw new CustomerNotFoundException(id);
     }
 
 }

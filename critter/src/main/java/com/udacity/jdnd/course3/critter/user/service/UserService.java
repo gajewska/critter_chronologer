@@ -37,7 +37,7 @@ public class UserService {
     }
 
     private void savePet(Pet pet, Customer customer) {
-        pet.setOwner(customer);
+        pet.addOwner(customer);
         petRepository.save(pet);
     }
 
@@ -54,7 +54,7 @@ public class UserService {
         if (optionalEmployee.isPresent()) {
             return optionalEmployee.get();
         } else {
-            throw new EmployeeNotFoundException(String.format("Employee with id %d wasn't found", id));
+            throw new EmployeeNotFoundException(id);
         }
     }
 
@@ -78,6 +78,6 @@ public class UserService {
             return optionalPet.get();
         }
 
-        throw new PetNotFoundException(String.format("Pet with id %d wasn't found", id));
+        throw new PetNotFoundException(id);
     }
 }

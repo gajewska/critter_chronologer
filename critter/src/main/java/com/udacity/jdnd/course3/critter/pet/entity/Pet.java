@@ -33,4 +33,9 @@ public class Pet {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private Customer owner;
+
+    public void addOwner(Customer customer) {
+        this.setOwner(customer);
+    }
 }
+
