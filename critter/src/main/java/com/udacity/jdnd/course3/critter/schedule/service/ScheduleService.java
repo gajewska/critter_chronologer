@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ScheduleService {
@@ -38,7 +37,7 @@ public class ScheduleService {
             saveSchedule.getEmployees().forEach(
                     employee -> employeeRepository.save(employee)
             );
-        }
+        } //TODO saveSchedule.addEmployee as in addPet
         return scheduleRepository.save(schedule);
     }
 
@@ -50,48 +49,33 @@ public class ScheduleService {
         Pet pet = findPet(petId);
 
         return scheduleRepository.findSchedulesByPetsIn(Collections.singleton(pet));
+        //TODO try removing findPet and using findSchedulesByPetsIdIn
     }
 
     public List<Schedule> getSchedulesByEmployeeId(Long employeeId) {
         Employee employee = findEmployee(employeeId);
 
         return scheduleRepository.findScheduleByEmployeesIn(Collections.singleton(employee));
+        //TODO as above
     }
 
     public List<Schedule> getSchedulesByCustomerId(Long customerId) {
         Customer customer = findCustomer(customerId);
 
         return scheduleRepository.findSchedulesByPetsOwner(customer);
+        //TODO as above
     }
 
     private Pet findPet(Long id) {
-        Optional<Pet> optionalPet = petRepository.findById(id);
-
-        if (optionalPet.isPresent()) {
-            return optionalPet.get();
-        }
-
-        throw new PetNotFoundException(id);
+        return petRepository.findById(id).orElseThrow(() -> new PetNotFoundException(id));
     }
 
     private Employee findEmployee(Long id) {
-        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
-
-        if (optionalEmployee.isPresent()) {
-            return optionalEmployee.get();
-        }
-
-        throw new EmployeeNotFoundException(id);
+        return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
     private Customer findCustomer(Long id) {
-        Optional<Customer> optionalCustomer = customerRepository.findById(id);
-
-        if (optionalCustomer.isPresent()) {
-            return optionalCustomer.get();
-        }
-
-        throw new CustomerNotFoundException(id);
+        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
 }

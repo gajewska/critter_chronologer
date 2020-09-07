@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
     List<Schedule> findSchedulesByPetsIn(Collection<Pet> pets);
+   // List<Schedule> findSchedulesByPetsIdIn(Long petId);
     List<Schedule> findScheduleByEmployeesIn(Collection<Employee> employees);
     List<Schedule> findSchedulesByPetsOwner(Customer owner);
 }
