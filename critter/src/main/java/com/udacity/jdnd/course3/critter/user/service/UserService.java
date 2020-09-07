@@ -11,10 +11,10 @@ import com.udacity.jdnd.course3.critter.user.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -58,20 +58,17 @@ public class UserService {
         }
     }
 
-    public Set<Employee> findEmployeesBySkills(Set<EmployeeSkill> employeeSkills) {
-        Set<Employee> employees = new HashSet<>();
-
-        employeeSkills.stream().forEach(
-                employeeSkill -> employees.addAll(employeeRepository.findAllBySkillsContains(employeeSkill))
-        );
-
-        return employees;
+    public List<Employee> findEmployeesBySkills(Set<EmployeeSkill> employeeSkills) {
+        List<Employee> distinctBySkillsIn = employeeRepository.findDistinctBySkillsIn(employeeSkills);
+        return distinctBySkillsIn.stream()
+                .filter(employee -> employee.getSkills().containsAll(employeeSkills))
+                .collect(Collectors.toList());
     }
 
     public Customer getCustomerByPetId(Long petId) {
         Pet pet = findPet(petId);
 
-        return customerRepository.findCustomerByPets(pet);
+        return pet.getOwner();
     }
 
     private Pet findPet(Long id) {

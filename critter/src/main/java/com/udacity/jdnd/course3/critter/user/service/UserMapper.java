@@ -10,6 +10,7 @@ import com.udacity.jdnd.course3.critter.user.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,23 +32,14 @@ public class UserMapper {
     }
 
     private List<Pet> setPetToCustomer(CustomerDTO customerDTO) {
-        if (customerDTO.getPetIds() != null) {
-            return findPetsByIds(customerDTO.getPetIds());
-        }
-        return null;
+        return Optional.ofNullable(customerDTO.getPetIds())
+                .map(ids -> findPetsByIds(ids))
+                .orElse(new ArrayList<>());
     }
 
     private List<Pet> findPetsByIds(List<Long> ids) {
         List<Pet> pets = ids.stream().map(id -> findPet(id)).collect(Collectors.toList());
         return pets;
-    }
-
-    private boolean checkOwner(Pet pet, Long ownerId) {
-        if (pet.getOwner() == null || pet.getOwner().getId().equals(ownerId)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public Pet findPet(Long id) {
@@ -79,12 +71,8 @@ public class UserMapper {
         Employee employee = new Employee();
         employee.setId(employeeDTO.getId());
         employee.setName(employeeDTO.getName());
-        if (employeeDTO.getSkills() != null) {
-            employee.setSkills(employeeDTO.getSkills());
-        }
-        if (employeeDTO.getDaysAvailable() != null) {
-            employee.setDaysAvailable(employeeDTO.getDaysAvailable());
-        }
+        employee.setSkills(employeeDTO.getSkills());
+        employee.setDaysAvailable(employeeDTO.getDaysAvailable());
         return employee;
     }
 
