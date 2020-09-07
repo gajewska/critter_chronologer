@@ -12,8 +12,10 @@ import com.udacity.jdnd.course3.critter.user.service.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -38,20 +40,20 @@ public class ScheduleMapper {
                 .build();
     }
 
-    private List<Employee> setEmployeesToSchedule(ScheduleDTO scheduleDTO) {
+    private Set<Employee> setEmployeesToSchedule(ScheduleDTO scheduleDTO) {
         if (scheduleDTO.getEmployeeIds() != null) {
-            return scheduleDTO.getEmployeeIds().stream().map(id -> findEmployee(id)).collect(Collectors.toList());
+            return scheduleDTO.getEmployeeIds().stream().map(id -> findEmployee(id)).collect(Collectors.toSet());
         }
 
-        return null;
+        return new HashSet<>();
     }
 
-    private List<Pet> setPetsToSchedule(ScheduleDTO scheduleDTO) {
+    private Set<Pet> setPetsToSchedule(ScheduleDTO scheduleDTO) {
         if (scheduleDTO.getPetIds() != null) {
-            return scheduleDTO.getPetIds().stream().map(id -> findPet(id)).collect(Collectors.toList());
+            return scheduleDTO.getPetIds().stream().map(id -> findPet(id)).collect(Collectors.toSet());
         }
 
-        return null;
+        return new HashSet<>();
     }
 
     public Employee findEmployee(Long id) {
@@ -84,12 +86,12 @@ public class ScheduleMapper {
                 .build();
     }
 
-    private List<Long> getEmployeesId(List<Employee> employees) {
+    private List<Long> getEmployeesId(Set<Employee> employees) {
         return employees != null ?
                 employees.stream().map(employee -> employee.getId()).collect(Collectors.toList()) : null;
     }
 
-    private List<Long> getPetsId(List<Pet> pets) {
+    private List<Long> getPetsId(Set<Pet> pets) {
         return pets != null ?
                 pets.stream().map(employee -> employee.getId()).collect(Collectors.toList()) : null;
     }

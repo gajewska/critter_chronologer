@@ -1,6 +1,5 @@
 package com.udacity.jdnd.course3.critter.user.repository;
 
-import com.udacity.jdnd.course3.critter.pet.entity.Pet;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import com.udacity.jdnd.course3.critter.user.entity.Employee;
 import org.springframework.data.repository.CrudRepository;

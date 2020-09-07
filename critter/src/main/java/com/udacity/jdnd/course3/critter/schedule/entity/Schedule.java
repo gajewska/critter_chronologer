@@ -32,13 +32,17 @@ public class Schedule {
     private Long id;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Employee> employees = new ArrayList<>();
+    private Set<Employee> employees = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Pet> pets = new ArrayList<>();
+    private Set<Pet> pets = new HashSet<>();
 
     private LocalDate date;
 
     @ElementCollection
     private Set<EmployeeSkill> activities = new HashSet<>();
+
+    public void addEmployees(Set<Employee> employees){
+        employees.addAll(employees);
+    }
 }

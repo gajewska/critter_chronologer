@@ -1,9 +1,6 @@
 package com.udacity.jdnd.course3.critter.schedule.repository;
 
-import com.udacity.jdnd.course3.critter.pet.entity.Pet;
 import com.udacity.jdnd.course3.critter.schedule.entity.Schedule;
-import com.udacity.jdnd.course3.critter.user.entity.Customer;
-import com.udacity.jdnd.course3.critter.user.entity.Employee;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +9,9 @@ import java.util.List;
 
 @Repository
 public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
-    List<Schedule> findSchedulesByPetsIn(Collection<Pet> pets);
-   // List<Schedule> findSchedulesByPetsIdIn(Long petId);
-    List<Schedule> findScheduleByEmployeesIn(Collection<Employee> employees);
-    List<Schedule> findSchedulesByPetsOwner(Customer owner);
+    List<Schedule> findSchedulesByPetsIdIn(Collection<Long> petsIds);
+
+    List<Schedule> findScheduleByEmployeesIdIn(Collection<Long> employeesIds);
+
+    List<Schedule> findSchedulesByPetsOwnerId(Long id);
 }
