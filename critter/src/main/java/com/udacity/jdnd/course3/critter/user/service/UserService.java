@@ -2,7 +2,6 @@ package com.udacity.jdnd.course3.critter.user.service;
 
 import com.udacity.jdnd.course3.critter.pet.entity.Pet;
 import com.udacity.jdnd.course3.critter.pet.repository.PetRepository;
-import com.udacity.jdnd.course3.critter.pet.service.PetNotFoundException;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import com.udacity.jdnd.course3.critter.user.entity.Customer;
 import com.udacity.jdnd.course3.critter.user.entity.Employee;
@@ -11,6 +10,7 @@ import com.udacity.jdnd.course3.critter.user.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -66,18 +66,6 @@ public class UserService {
     }
 
     public Customer getCustomerByPetId(Long petId) {
-        Pet pet = findPet(petId);
-
-        return pet.getOwner();
-    }
-
-    private Pet findPet(Long id) {
-        Optional<Pet> optionalPet = petRepository.findById(id);
-
-        if (optionalPet.isPresent()) {
-            return optionalPet.get();
-        }
-
-        throw new PetNotFoundException(id);
+        return customerRepository.findCustomerByPetsIdIn(Collections.singleton(petId));
     }
 }

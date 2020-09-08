@@ -32,7 +32,6 @@ public class PetService {
         customerRepository.save(customer);
     }
 
-
     public Pet getById(Long id) {
         Optional<Pet> optionalPet = petRepository.findById(id);
         if (optionalPet.isPresent()) {

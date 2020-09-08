@@ -32,5 +32,4 @@ public class ScheduleService {
     public List<Schedule> getSchedulesByCustomerId(Long customerId) {
         return scheduleRepository.findSchedulesByPetsOwnerId(customerId);
     }
-
 }

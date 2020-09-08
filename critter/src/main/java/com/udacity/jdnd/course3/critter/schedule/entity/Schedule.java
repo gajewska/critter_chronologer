@@ -15,9 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -41,8 +39,4 @@ public class Schedule {
 
     @ElementCollection
     private Set<EmployeeSkill> activities = new HashSet<>();
-
-    public void addEmployees(Set<Employee> employees){
-        employees.addAll(employees);
-    }
 }

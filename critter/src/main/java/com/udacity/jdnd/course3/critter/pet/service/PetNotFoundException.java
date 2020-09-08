@@ -1,7 +1,5 @@
 package com.udacity.jdnd.course3.critter.pet.service;
 
-import java.util.function.Supplier;
-
 public class PetNotFoundException extends RuntimeException {
 
     public PetNotFoundException(Long id){
