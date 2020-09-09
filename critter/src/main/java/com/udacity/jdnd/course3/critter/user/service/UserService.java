@@ -10,12 +10,14 @@ import com.udacity.jdnd.course3.critter.user.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class UserService {
 
