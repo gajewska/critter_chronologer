@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -60,10 +62,13 @@ public class UserService {
         }
     }
 
-    public List<Employee> findEmployeesBySkills(Set<EmployeeSkill> employeeSkills) {
+    public List<Employee> findEmployeesBySkills(Set<EmployeeSkill> employeeSkills, LocalDate date) {
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+
         List<Employee> distinctBySkillsIn = employeeRepository.findDistinctBySkillsIn(employeeSkills);
         return distinctBySkillsIn.stream()
                 .filter(employee -> employee.getSkills().containsAll(employeeSkills))
+                .filter(employee -> employee.getDaysAvailable().contains(dayOfWeek))
                 .collect(Collectors.toList());
     }
 

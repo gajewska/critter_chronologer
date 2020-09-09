@@ -78,10 +78,9 @@ public class UserController {
         userService.saveEmployee(employee);
     }
 
-    //TODO check if date has some meaning
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        List<Employee> employees = userService.findEmployeesBySkills(employeeDTO.getSkills());
+        List<Employee> employees = userService.findEmployeesBySkills(employeeDTO.getSkills(), employeeDTO.getDate());
 
         return employees.stream()
                 .map(employee -> userMapper.employeeToDTO(employee))
